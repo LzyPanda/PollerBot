@@ -1,15 +1,15 @@
-Rasperry Pi (bestellt)
+Rasperry Pi (bestellt - DHBW)
 Gehäuse
 SD-Karte min. 4GB raspberryfähig
 USB-WLAN Stick raspberryfähig
 Powerbank für Stromversorgung Raspberry über microUSB
-Jumper Kabel (selbst bestellt)
-Schrittmotor (selbst bestellt)
+Jumper Kabel mit Stecker (bestellt - Simon)
+Schrittmotor (bestellt - Simon)
 
 6 Akkubatterien AA 1,2V für Robby-Antrieb
-Batteriehalter (min. 6)
+Batteriehalter f. 6 (bestellt - Simon)
 
 eventuell später:
-Abstandssensor (bestellt)
+Abstandssensor (bestellt - DHBW)
 Steckbrett
 Kamera
