@@ -3,10 +3,11 @@ Gehäuse
 SD-Karte min. 4GB raspberryfähig
 USB-WLAN Stick raspberryfähig
 Powerbank für Stromversorgung Raspberry über microUSB
-Jumper Kabel mit Stecker (bestellt - Simon)
 Schrittmotor (bestellt - Simon)
+Jumper Kabel mit Stecker (bestellt - Simon)
+Lüsterklemmen
 
-6 Akkubatterien AA 1,2V für Robby-Antrieb
+6 Akkubatterien AA 1,2V für Robby-Antrieb / Aldi?
 Batteriehalter f. 6 (bestellt - Simon)
 
 eventuell später:
