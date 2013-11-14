@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.7.0_10/jre/lib/jfxrt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sebastian/Documents/tinkerforge_java_bindings_2_0_12/Tinkerforge.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
