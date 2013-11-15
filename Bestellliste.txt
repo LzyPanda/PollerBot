@@ -1,7 +1,7 @@
 Rasperry Pi (bestellt - DHBW)
 Gehäuse
-SD-Karte min. 4GB raspberryfähig
-USB-WLAN Stick raspberryfähig
+SD-Karte min. 4GB raspberryfähig (bestellt - Sibi)
+USB-WLAN Stick raspberryfähig (bestellt - Sibi)
 Powerbank für Stromversorgung Raspberry über microUSB
 Schrittmotor (bestellt - Simon)
 Jumper Kabel mit Stecker (bestellt - Simon)
@@ -12,5 +12,5 @@ Batteriehalter f. 6 (bestellt - Simon)
 
 eventuell später:
 Abstandssensor (bestellt - DHBW)
-Steckbrett
+Steckbrett (bestellt - Sibi)
 Kamera
