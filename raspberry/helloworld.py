@@ -1,3 +1,3 @@
-__author__ = 'Simon'
+__author__ = 'CroMarmot'
 
 print "Hello world"
