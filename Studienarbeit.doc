@@ -1,0 +1,119 @@
+
+
+Studienarbeitsthema
+
+
+
+STUDIENARBEIT
+
+des Studienganges Informationstechnik
+
+an der Dualen Hochschule Baden-Württemberg Mannheim
+
+von
+Sebastian Barz
+Simon Buttke
+Sebastian Hantelmann
+Yusuf Peker
+Ferdinand Frank
+
+Abgabedatum
+
+Bearbeitungszeitraum	12 Wochen
+Matrikelnummer, Kurs	Matrikelnummer, TINF11ITNS
+Ausbildungsfirma	Firmenname, Stadt
+Betreuer der Dualen Hochschule	Prof. Jochem Poller
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Erklärung
+gemäß § 5 (3) der „Studien- und Prüfungsordnung DHBW Technik“ vom 22. September 2011.
+Ich habe die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet.
+_________________________	_________________________
+Ort, Datum	Ferdinand Frank usw.
+ 
+Inhaltsverzeichnis
+Abkürzungsverzeichnis	II
+Abbildungsverzeichnis	III
+1	Einleitung	1
+1.1	Grundlegende Testarten:	2
+1.1.1	Funktionaler Test	2
+1.1.2	Nicht funktionaler Test	2
+1.1.3	Strukturbezogener Test	3
+1.1.4	Änderungsbezogener Test	4
+2	Fazit und Ausblick	4
+3	Appendix	4
+4	Glossar	4
+Literaturverzeichnis	5
+ 
+Abkürzungsverzeichnis
+	
+ 
+Abbildungsverzeichnis
+Fehler! Es konnten keine Einträge für ein Abbildungsverzeichnis gefunden werden. 
+1	Einleitung
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.1	Grundlegende Testarten:
+1.1.1	Funktionaler Test
+Funktionale Tests oder auch Funktionsprüfungen sind sogenannte Black Box Tests, die dem Überprüfen der Funktionalität einer Anwendung unter Testbedingungen dient. Geprüft wird, dass nach „außen sichtbare Ein-/Ausgabeverhalten eines Testobjekts“ . Hierzu ein kleines Beispiel:
+Es wird die funktionale Anforderung gestellt, dass beim Betätigen eines Buttons, ein Fenster geöffnet werden soll. Tritt dies ein, ist dieser Testschritt als positiv zu verzeichnen. 
+Die manuelle oder automatisierte Durchführung von Anforderungsbasierten Funktionalen Tests findet im Softwareentwicklungsprozess in der Regel bei System- und Abnahmetests statt.
+Das Pendant zu funktionalen Tests, sind nicht funktionalen Tests.
+1.1.2	Nicht funktionaler Test
+Das nicht funktionale Testen überprüft in wie hoher Qualität das System seine Funktionen umsetzt. Um das vorherige Beispiel aufzugreifen, wurde in der Anforderungsdefinition auf nicht funktionaler Ebene definiert, dass sich das Fenster innerhalb von einer Sekunde geöffnet haben soll, getestet wird nun wie schnell die Öffnung stattfand.
+Dem Testportfolio stehen die verschiedensten, in Abbildung.. illustrierten, Testarten zur Überprüfung nicht funktionaler Systemeigenschaften zur Verfügung.
+  
+Abbildung 2: nicht funktionale Testarten
+1.1.3	Strukturbezogener Test
+Strukturelle Tests basieren auf den „internen Struktur[en] bzw. Architektur[en] der Software“. Fokus liegt auf dem Testen von Kontrollflüssen, Menüstrukturen und Aufrufhierarchien, mit dem Ziel möglichst alle Bereiche der Software zu erreichen.
+Komponenten und Integrationstests gelten als Strukturbezogene Testarten, werden aber auch in höheren Testphasen vereinzelt ergänzend eingesetzt.
+1.1.4	Änderungsbezogener Test
+Durch Weiterentwicklungen, Fehlerbereinigungen oder Wartungsarbeiten wird Software modifiziert oder durch neue Softwarebausteine ergänzt, diese Abwandlungen der Software müssen auf Anforderungserfüllung, Seiteneffekte und Fehler erneut getestet werden. Eine hierfür angewandte Testart sind zumeist Regressionstests.  
+Der Regressionstest beinhaltet die erneute Durchführung eines Tests, nach einer bereits getesteten Softwarekomponente nach deren Modifikation, mit dem Ziel nachzuweisen, dass keine neuen Fehlerzustände erzeugt oder bei intendierter Fehlerbereinigung der Fehler behoben wurde. Auch werden Veränderungen im nicht funktionalen Bereich, wie zum Beispiel Reaktionszeiten oder Lastperformance, erhoben.
+
+2	Fazit und Ausblick
+3	Appendix
+4	Glossar
+ 
+Literaturverzeichnis
+
+A. Spilner, T. L. (2005). Basiswissen Softwaretest.
+Department, K. (kein Datum). ISTQB Schulung. In ISTQB.
+ISTQB. (2010). ISTQB / GTB Glossar der Fehlerbegriffe.
+
+
+
+
+
+
