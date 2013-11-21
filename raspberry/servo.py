@@ -1,3 +1,5 @@
+__author__ = 'CroMarmot'
+
 import RPi.GPIO as GPIO
 
 import time
