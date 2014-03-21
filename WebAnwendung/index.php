@@ -5,14 +5,16 @@
 	<script type="text/javascript">
 	var button='';
 	$(document).keydown(function(e){
-    if (e.keyCode == 37) { 				//code für linke pfeiltaste
-       	button='left';
-       	scriptAusfuehren();   
-    }	
-    else if(e.keyCode==39) {			//code für rechte pfeiltaste
-   		button='right';
+	 switch(e.which) {
+        case 37:  //code für linke pfeiltaste
+		button='left';
+       	scriptAusfuehren();
+        break;
+		case 39: //code für rechte pfeiltaste
+		button='right';
       	scriptAusfuehren();
-    }
+		break;
+		default :return;   
     });	
 		function scriptAusfuehren(){
 			$.ajax({ url: './Script.php',
