@@ -1,8 +1,8 @@
-__author__ = 'CroMarmot'
+__author__ = 'CroMarmot-OSX'
+#20140413
+#TODO: left-forward e.g. 25/25 or 50/50
 
 import RPi.GPIO as GPIO
-
-import time
 import signal
 
 from pizypwm import *
@@ -33,61 +33,42 @@ GPIO.setup(21,GPIO.OUT)
 GPIO.setup(23,GPIO.OUT)
 GPIO.setup(24,GPIO.OUT)
 
-
-while True:
-    
-    first.start(50)
-    second.start(0)
-    third.start(50)
-    fourth.start(0)
-    print "Drehung nach rechts"
-    time.sleep(1)
-
-    first.start(0)
-    second.start(0)
-    third.start(0)
-    fourth.start(0)
-    print "Stop"
-    time.sleep(1)
-    
-    first.start(0)
-    second.start(50)
-    third.start(0)
-    fourth.start(50)
-    print "Drehung nach Links"
-    time.sleep(1)
-
-    first.start(0)
-    second.start(0)
-    third.start(0)
-    fourth.start(0)
-    print "Stop"
-    time.sleep(1)
-
+def forward():
     first.start(50)
     second.start(0)
     third.start(0)
     fourth.start(50)
     print "Geradeaus vorwaerts"
-    time.sleep(1)
-    
-    first.start(0)
-    second.start(0)
-    third.start(0)
-    fourth.start(0)
-    print "Stop"
-    time.sleep(1)
+    return
 
+def backward():
     first.start(0)
     second.start(50)
     third.start(50)
     fourth.start(0)
     print "Geradeaus rueckwaerts"
-    time.sleep(1)
+    return
 
+def left():
+    first.start(0)
+    second.start(50)
+    third.start(0)
+    fourth.start(50)
+    print "Drehung nach Links"
+    return
+
+def right():
+    first.start(50)
+    second.start(0)
+    third.start(50)
+    fourth.start(0)
+    print "Drehung nach rechts"
+    return
+
+def stop():
     first.start(0)
     second.start(0)
     third.start(0)
     fourth.start(0)
     print "Stop"
-    time.sleep(1)
+    return

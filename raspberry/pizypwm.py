@@ -1,4 +1,4 @@
-__author__ = 'CroMarmot
+__author__ = 'CroMarmot'
 
 import RPi.GPIO as GPIO
 import threading
