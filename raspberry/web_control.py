@@ -4,6 +4,7 @@ __author__ = 'CroMarmot-OSX'
 
 import RPi.GPIO as GPIO
 import signal
+import sys
 
 from pizypwm import *
 
@@ -41,7 +42,7 @@ def forward():
     print "Geradeaus vorwaerts"
     return
 
-def backward():
+def reverse():
     first.start(0)
     second.start(50)
     third.start(50)
@@ -72,3 +73,16 @@ def stop():
     fourth.start(0)
     print "Stop"
     return
+
+controlarg = sys.argv[0]
+
+if controlarg == 'forward':
+    forward()
+elif controlarg == 'reverse':
+    reverse()
+elif controlarg == 'left':
+    left()
+elif controlarg == 'right':
+    right()
+elif controlarg == 'stop':
+    stop()
