@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RPi Cam Control</title> 
+    <script type="text/javascript" src="jquery"></script> 
+  	<script type="text/javascript">
+     var ws = new WebSocket("ws://192.168.10.1:8888/websocket");
+	var arrButton= new Array();
+	var button='';
+	var lastButton='';
+	arrButton['W']=false;
+	arrButton['A']=false;
+	arrButton['S']=false;
+	arrButton['D']=false;
+	
+	var dummy = function(macro, args, response) {                   
+                }
+				
+	$(document).keydown(function(e){		
+		
+			
+		switch(e.which) {
+        	case 87:  //code für W
+        	if(zaehlen()<2 & checkReverse()==false){
+        		button='W';
+				arrButton['W']=true;
+       
+       			scriptAusfuehren();
+             lastButton='W';
+        	}        	
+        	break;
+			case 65: //code für A
+			if(zaehlen()<2 & checkReverse()==false){
+        		button='A';
+				arrButton['A']=true;
+      
+      			scriptAusfuehren();	
+              lastButton='A';	
+        	}
+			break;
+			case 83: //code für S
+			if(zaehlen()<1){
+        		button='S';
+				arrButton['S']=true;
+        
+      			scriptAusfuehren();
+            lastButton='S';
+        	}			
+			break;
+			case 68: //code für D
+			if(zaehlen()<2  &checkReverse()==false){
+        		button='D';
+				arrButton['D']=true;
+        
+      			scriptAusfuehren();
+            lastButton='D';
+        	}			
+			break;
+			default :return;   
+		}
+    	
+    
+	});	
+
+	$(document).keyup(function(u){
+		switch(u.which) {
+      case 87:  //code für W
+			button='W';
+			arrButton['W']=false;
+      lastButton='';
+      scriptAbort();      
+      break;
+			case 65: //code für A
+			button='A';
+			arrButton['A']=false;
+      lastButton='';
+      scriptAbort();
+			break;
+			case 83: //code für S
+			button='S';
+			arrButton['S']=false;
+      lastButton='';
+      scriptAbort();
+			break;
+			case 68: //code für D
+			button='D';
+			arrButton['D']=false;
+      lastButton='';
+      scriptAbort();
+			break;
+			default :return;   
+    	}
+	});	
+	function scriptAusfuehren()
+	{
+		
+    $('#'+button).css('background-color','yellow');
+    whichDirection();
+        
+		
+	}
+
+	function scriptAbort()
+	{
+		$('#'+button).css('background-color','buttonface');
+    whichDirection();
+    
+	}
+
+  function whichDirection()
+  {
+    if(arrButton['W']==true)
+    {
+      console.log('W drücken');
+      if(lastButton!='W'){
+         console.log('W fahren');
+        forward();
+      }
+      
+
+    }
+    else if(arrButton['A']==true)
+    {
+      console.log('A drücken');
+      if(lastButton!='A'){
+         console.log('A fahren');
+        left();
+      }
+      
+    }
+    else if (arrButton['S']==true) 
+    {
+      console.log('S drücken');
+      if(lastButton!='S'){
+         console.log('S fahren');
+        reverse();
+      }
+      
+    }
+    else if (arrButton['D']==true) 
+    {
+      console.log('D drücken');
+      if(lastButton!='D'){
+        console.log('D fahren');
+        right();
+      }
+      
+    }
+    else{
+      console.log('stoppen');
+      stop();    
+    }
+  }
+
+  function left()
+  {
+    ws.send('left');
+    //$.ajax({       
+    //   url: "http://192.168.10.1:5000/stop/",
+    //  crossDomain: true,
+   // });
+   // $.ajax({
+    //  url: "http://192.168.10.1:5000/left/",
+    //  crossDomain: true,
+   //})
+  }
+
+  function right()
+  {
+    ws.send('right');
+    //$.ajax({
+    //  url: "http://192.168.10.1:5000/stop/",
+    //  crossDomain: true,
+    //});
+    //$.ajax({
+    //  url: "http://192.168.10.1:5000/right/",
+    //  crossDomain: true,
+    //})
+  }
+
+  function forward()
+  {
+    ws.send('forwards');
+   // $.ajax({
+    //  url: "http://192.168.10.1:5000/stop/",
+    //  crossDomain: true,
+   // });
+   // $.ajax({
+    //  url: "http://192.168.10.1:5000/forward/",
+    //  crossDomain: true,
+   // })
+  }
+
+  function stop()
+  {
+    ws.send('stop');
+    //$.ajax({
+      //url: "http://192.168.10.1:5000/stop/",
+     // crossDomain: true,
+   // })
+  }
+
+  function reverse()
+  {
+    ws.send('reverse');
+    //$.ajax({
+      //url: "http://192.168.10.1:5000/stop/",
+      //crossDomain: true,
+   // });
+    //$.ajax({
+    //  url: "http://192.168.10.1:5000/reverse/",
+    //  crossDomain: true,
+   // })
+  }
+
+	function zaehlen(){
+		var zaehler=0;
+		
+			if(arrButton['W']==true)
+			{
+				zaehler++;
+			}
+			if(arrButton['A']==true)
+			{
+				zaehler++;
+			}
+			if(arrButton['S']==true)
+			{
+				zaehler++;
+			}
+			if(arrButton['D']==true)
+			{
+				zaehler++;
+			}
+			return zaehler;
+	}
+
+	function checkReverse(){
+		if(arrButton['S']==true)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	
+	}
+	
+	</script>
+
+  </head>
+     <div id='controlButtons' >
+      <div id='top'>      
+      <button id='W' onclick="button='W';scriptAusfuehren()">W</button>
+      </div>
+      <div id='bottom'>
+      <button id='A' onclick="button='A';scriptAusfuehren()">A</button>
+      <button id='S' onclick="button='S';scriptAusfuehren()">S</button>
+      <button id='D' onclick="button='D';scriptAusfuehren()">D</button>
+      </div>
+      </div>
+  </body>
+</html>
