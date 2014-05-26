@@ -10,6 +10,7 @@ __status__ = 'Production'
 
 #import some python stuff
 import signal
+import multiprocessing
 import time
 #import webservice tornado
 import tornado.web
@@ -38,13 +39,8 @@ first = PiZyPwm(20000, 19, GPIO.BOARD)
 second = PiZyPwm(20000, 21, GPIO.BOARD)
 third = PiZyPwm(20000, 23, GPIO.BOARD)
 fourth = PiZyPwm(20000, 24, GPIO.BOARD)
-
-GPIO.setmode(GPIO.BOARD)
-
-GPIO.setup(19,GPIO.OUT)
-GPIO.setup(21,GPIO.OUT)
-GPIO.setup(23,GPIO.OUT)
-GPIO.setup(24,GPIO.OUT)
+TRIGGER = 14
+ECHO = 15
 
 def forwards():
     first.start(0)
@@ -74,6 +70,48 @@ def right():
     fourth.start(0)
     return "right"
 
+def stop():
+    first.start(0)
+    second.start(0)
+    third.start(0)
+    fourth.start(0)
+    return "stop"
+
+def autonomy():
+    while True:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(TRIGGER,GPIO.OUT)
+        GPIO.setup(ECHO,GPIO.IN)
+
+        GPIO.output(TRIGGER, False)
+
+        time.sleep(0.5)
+
+        GPIO.output(TRIGGER, True)
+        time.sleep(0.00001)
+        start = time.time()
+        GPIO.output(TRIGGER, False)
+
+        while GPIO.input(ECHO)==0:
+            pass
+
+        start = time.time()
+
+        while GPIO.input(ECHO)==1:
+            pass
+
+        stop = time.time()
+        elapsed = stop-start
+        distance = elapsed * 17000
+
+        if distance < 20:
+            stop()
+            time.sleep(1)
+            right()
+            time.sleep(1)
+        else:
+            forwards()
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
@@ -95,6 +133,14 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             action = right()
         elif self.message == 'stop':
             action = stop()
+        elif self.message == 'autonomy':
+            autoproc = multiprocessing.Process(target=autonomy)
+            autoproc.start()
+        elif self.message == 'control':
+            try:
+                autoproc.terminate()
+            except:
+                pass
 
 application = tornado.web.Application([
     (r"/", MainHandler),

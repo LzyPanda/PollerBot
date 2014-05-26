@@ -18,8 +18,9 @@ def ControlAPairOfPins(FirstPin,FirstState,SecondPin,SecondState):
   if SecondState == "1":
     GPIO.output(int(SecondPin),True)
   else:
-  return
     GPIO.output(int(SecondPin),False)
+  return
+
 
 print "Gap Sensoring with SRF04"
 
