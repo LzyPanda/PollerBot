@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python
 
 __author__ = 'CroMarmot-OSX'
 #20140512
