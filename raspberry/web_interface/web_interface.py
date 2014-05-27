@@ -21,8 +21,6 @@ import RPi.GPIO as GPIO
 #import PWM control for servo
 from pizypwm import *
 
-GPIO.setwarnings(False)
-
 def endProcess(signalnum = None, handler = None):
     first.stop()
     second.stop()
@@ -31,6 +29,8 @@ def endProcess(signalnum = None, handler = None):
 
     GPIO.cleanup()
     exit(0)
+	
+GPIO.setwarnings(False)
 
 signal.signal(signal.SIGTERM, endProcess)
 signal.signal(signal.SIGINT, endProcess)
