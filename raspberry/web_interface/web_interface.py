@@ -41,6 +41,8 @@ third = PiZyPwm(20000, 23, GPIO.BOARD)
 fourth = PiZyPwm(20000, 24, GPIO.BOARD)
 TRIGGER = 14
 ECHO = 15
+##global running
+running = False
 
 def forwards():
     first.start(0)
@@ -77,7 +79,7 @@ def stop():
     fourth.start(0)
     return "stop"
 
-def autonomy():
+def autonomy(autoproc_pipe):
     while True:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(TRIGGER,GPIO.OUT)
@@ -89,20 +91,21 @@ def autonomy():
 
         GPIO.output(TRIGGER, True)
         time.sleep(0.00001)
-        start = time.time()
+        startt = time.time()
         GPIO.output(TRIGGER, False)
 
         while GPIO.input(ECHO)==0:
             pass
 
-        start = time.time()
+        startt = time.time()
 
         while GPIO.input(ECHO)==1:
             pass
 
-        stop = time.time()
-        elapsed = stop-start
+        stopt = time.time()
+        elapsed = stopt-startt
         distance = elapsed * 17000
+        print distance
 
         if distance < 20:
             stop()
@@ -110,6 +113,7 @@ def autonomy():
             right()
             time.sleep(1)
         else:
+            print "forwards2"
             forwards()
 
 class MainHandler(tornado.web.RequestHandler):
@@ -123,7 +127,16 @@ class JQueryHandler(tornado.web.RequestHandler):
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         self.message = message
-        if self.message == 'forwards':
+        if self.message == 'autonomy':
+##            global running
+            if running == False:
+                interface_pipe, autoproc_pipe = multiprocessing.Pipe()
+                autoproc = multiprocessing.Process(target=autonomy, args=(autoproc_pipe, ))
+                print "start autoproc"
+                autoproc.start()
+                global running
+                running = True
+        elif self.message == 'forwards':
             action = forwards()
         elif self.message == 'reverse':
             action = reverse()
@@ -133,9 +146,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             action = right()
         elif self.message == 'stop':
             action = stop()
-        elif self.message == 'autonomy':
-            autoproc = multiprocessing.Process(target=autonomy)
-            autoproc.start()
         elif self.message == 'control':
             try:
                 autoproc.terminate()
