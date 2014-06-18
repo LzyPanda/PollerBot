@@ -39,8 +39,8 @@ first = PiZyPwm(20000, 19, GPIO.BOARD)
 second = PiZyPwm(20000, 21, GPIO.BOARD)
 third = PiZyPwm(20000, 23, GPIO.BOARD)
 fourth = PiZyPwm(20000, 24, GPIO.BOARD)
-TRIGGER = 14
-ECHO = 15
+TRIGGER = 8 
+ECHO = 10
 running = False
 
 def forwards():
@@ -78,25 +78,14 @@ def stop():
     fourth.start(0)
     return "stop"
 
-def ControlAPairOfPins(FirstPin,FirstState,SecondPin,SecondState):
-    if FirstState == "1":
-        GPIO.output(int(FirstPin),True)
-    else:
-        GPIO.output(int(FirstPin),False)
+def autonomy():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(TRIGGER,GPIO.OUT)
+    GPIO.setup(ECHO,GPIO.IN)
 
-    if SecondState == "1":
-        GPIO.output(int(SecondPin),True)
-    else:
-        GPIO.output(int(SecondPin),False)
-    return
+    GPIO.output(TRIGGER, False)
 
-def autonomy(autoproc_pipe):
     while True:
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(TRIGGER,GPIO.OUT)
-        GPIO.setup(ECHO,GPIO.IN)
-
-        GPIO.output(TRIGGER, False)
 
         time.sleep(0.5)
 
@@ -117,32 +106,14 @@ def autonomy(autoproc_pipe):
         distance = elapsed * 17000
 
         if distance < 20:
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(19,GPIO.OUT)
-            GPIO.setup(21,GPIO.OUT)
-            GPIO.setup(23,GPIO.OUT)
-            GPIO.setup(24,GPIO.OUT)
-            ControlAPairOfPins("19","0","21","0")
-            ControlAPairOfPins("23","0","24","0")
+            stop()
             print "Stop"
             time.sleep(1)
 
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(19,GPIO.OUT)
-            GPIO.setup(21,GPIO.OUT)
-            GPIO.setup(23,GPIO.OUT)
-            GPIO.setup(24,GPIO.OUT)
-            ControlAPairOfPins("19","1","21","0")
-            ControlAPairOfPins("23","1","24","0")
+            right()
             time.sleep(1)
         else:
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(19,GPIO.OUT)
-            GPIO.setup(21,GPIO.OUT)
-            GPIO.setup(23,GPIO.OUT)
-            GPIO.setup(24,GPIO.OUT)
-            ControlAPairOfPins("19","1","21","0")
-            ControlAPairOfPins("23","0","24","1")
+            forwards()
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -157,13 +128,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.message = message
         if self.message == 'autonomy':
             if running == False:
-                autoproc = multiprocessing.Process(target=autonomy,)
-                autoproc.start()
+                threading.Thread(target=autonomy, args=()).start()
                 global running
                 running = True
         elif self.message == 'control':
             if running == True:
-                autoproc.terminate()
                 global running
                 running = False
         elif self.message == 'forwards':
